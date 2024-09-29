@@ -38,6 +38,10 @@ const movieSchema = new mongoose.Schema({
         required: true,
         min: 0,
         max: 10
+    },
+    createdAt: { 
+        type: Date, 
+        default: Date.now, // Kullanıcı oluşturulduğunda tarih otomatik olarak atanır
     }
 });
 

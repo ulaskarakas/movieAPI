@@ -23,8 +23,8 @@ const userRoutes = require('./routes/users');
 const movieRoutes = require('./routes/movies');
 
 // Rotaları kullanma
-app.use('/users', userRoutes);
-app.use('/movies', movieRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/movies', movieRoutes);
 
 // Sunucunun çalıştırılması
 const PORT = process.env.PORT || 3000;

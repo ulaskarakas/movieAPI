@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     createdAt: { 
         type: Date, 
         default: Date.now, // Kullanıcı oluşturulduğunda tarih otomatik olarak atanır
-    },
+    }
 });
 
 module.exports = mongoose.model('User', userSchema);
