@@ -1,13 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv').config();
 
 const app = express();
 // Body parser'ı kullanarak gelen JSON verilerini okuyabilmek için
 app.use(bodyParser.json());
 
+// MongoDB Atlas URI
+const uri = process.env.MONGODB_ATLAS_URI;
+
 // MongoDB bağlantısı
-mongoose.connect('mongodb://localhost:27017/movieapi', {
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
