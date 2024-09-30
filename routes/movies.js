@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Movie = require('../models/movie');
 
-// Film CRUD İşlemleri
-// Film oluşturma (POST)
+// Movie CRUD Operations
+// Create movie (POST)
 router.post('/', async (req, res) => {
     const movie = new Movie({
         name: req.body.name,
@@ -24,19 +24,19 @@ router.post('/', async (req, res) => {
     }
 
 });
-// Tüm filmleri okuma (GET)
+// Read all movies (GET)
 router.get('/', async (req, res) => {
     try {
-        const movie = await Movie.find(); // Tüm filmleri bul
-        res.status(200).send(movie); // Filmleri döndür
+        const movie = await Movie.find();
+        res.status(200).send(movie);
     } catch (error) {
-        res.status(500).send(error); // Hata durumunda yanıt
+        res.status(500).send(error);
     }
 });
-// Belirli bir filmi okuma (GET)
+// Read a specific movie with id (GET)
 router.get('/:id', async (req, res) => {
     try {
-        const movie = await Movie.findById(req.params.id); // ID ile filmi bul
+        const movie = await Movie.findById(req.params.id);
         if (!movie) {
             return res.status(404).send('Film bulunamadı');
         }
@@ -45,22 +45,22 @@ router.get('/:id', async (req, res) => {
         res.status(500).send(error);
     }
 });
-// Belirli bir filmi güncelleme (PUT)
+// Update a specific movie with id  (PUT)
 router.put('/:id', async (req, res) => {
     try {
-        const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, { new: true }); // Filmi güncelle
+        const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, { new: true }); 
         if (!movie) {
             return res.status(404).send('Film bulunamadı');
         }
-        res.status(200).send(movie); // Güncellenmiş filmi döndür
+        res.status(200).send(movie);
     } catch (error) {
         res.status(400).send(error);
     }
 });
-// Belirli bir filmi silme (DELETE):
+// Delete a specific movie with id (DELETE):
 router.delete('/:id', async (req, res) => {
     try {
-        const movie = await Movie.findByIdAndDelete(req.params.id); // ID ile filmi sil
+        const movie = await Movie.findByIdAndDelete(req.params.id);
         if (!movie) {
             return res.status(404).send('Film bulunamadı');
         }

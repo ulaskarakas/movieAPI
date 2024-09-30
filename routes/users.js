@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 
-// Kullanıcı CRUD İşlemleri
-// Kullanıcı oluşturma (POST)
+// User CRUD Operations
+// Create user (POST)
 router.post('/', async (req, res) => {
     const user = new User({
         username: req.body.username,
@@ -18,19 +18,33 @@ router.post('/', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
-// Tüm kullanıcıları okuma (GET)
-router.get('/', async (req, res) => {
+// Login user (POST)
+router.post('/login', async(req, res) => {
+    const { email, password} = req.body;
     try {
-        const user = await User.find(); // Tüm kullanıcıları bul
-        res.status(200).send(user); // Kullanıcıları döndür
+        const user = await User.findOne({email});
+        if (!user || user.password !== password) {
+            return res.status(401).send('Email or password is incorrect.');
+        }
+        res.status(200).send('Login successful!')
     } catch (error) {
-        res.status(500).send(error); // Hata durumunda yanıt gönder
+        console.log(error);
+        res.status(500).send('Server error.')
     }
 });
-// Belirli bir kullanıcıyı okuma (GET)
+// Read all users (GET)
+router.get('/', async (req, res) => {
+    try {
+        const user = await User.find(); 
+        res.status(200).send(user);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+// Read a specific user with id (GET)
 router.get('/:id', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id); // ID ile kullanıcıyı bul
+        const user = await User.findById(req.params.id);
         if (!user) {
             return res.status(404).send('Kullanıcı bulunamadı');
         }
@@ -39,28 +53,28 @@ router.get('/:id', async (req, res) => {
         res.status(500).send(error);
     }
 });
-// Belirli bir kullanıcıyı güncelleme (PUT)
+// Update a specific user with id (PUT)
 router.put('/:id', async (req, res) => {
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true }); // Kullanıcıyı bul ve güncelle
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!user) {
-            return res.status(404).send('Kullanıcı bulunamadı'); // Kullanıcı yoksa hata yanıtı
+            return res.status(404).send('Kullanıcı bulunamadı');
         }
-        res.status(200).send(user); // Güncellenmiş kullanıcıyı döndür
+        res.status(200).send(user);
     } catch (error) {
-        res.status(400).send(error); // Hata durumunda yanıt gönder
+        res.status(400).send(error);
     }
 });
-// Belirli bir kullanıcı silme (DELETE):
+// Delete a specific user with id (DELETE):
 router.delete('/:id', async (req, res) => {
     try {
-        const user = await User.findByIdAndDelete(req.params.id); // Kullanıcıyı bul ve sil
+        const user = await User.findByIdAndDelete(req.params.id);
         if (!user) {
-            return res.status(404).send('Kullanıcı bulunamadı'); // Kullanıcı yoksa hata yanıtı
+            return res.status(404).send('Kullanıcı bulunamadı');
         }
-        res.status(200).send({ message: 'Kullanıcı silindi' }); // Başarılı yanıt
+        res.status(200).send({ message: 'Kullanıcı silindi' });
     } catch (error) {
-        res.status(500).send(error); // Hata durumunda yanıt gönder
+        res.status(500).send(error);
     }
 });
 
