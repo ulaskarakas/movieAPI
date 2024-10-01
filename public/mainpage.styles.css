@@ -29,9 +29,11 @@ body {
     z-index: 1000;
 }
 
-.navbar .logo {
+.navbar .logo a{
     font-size: 1.5rem;
     font-weight: bold;
+    text-decoration: none;
+    color: white;
 }
 
 .container {

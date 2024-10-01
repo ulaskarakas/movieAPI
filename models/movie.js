@@ -11,7 +11,9 @@ const movieSchema = new mongoose.Schema({
     },
     releaseYear: {
         type: Number,
-        required: true
+        required: true,
+        min: 1900,
+        max: 2250
     },
     genre: {
         type: String,
@@ -31,13 +33,15 @@ const movieSchema = new mongoose.Schema({
     },
     duration: {
         type: Number,
-        required: true
+        required: true,
+        min: 1,
+        max: 300
     },
     rating: {
         type: Number,
         required: true,
-        min: 0,
-        max: 10
+        min: 1,
+        max: 5
     },
     createdAt: { 
         type: Date, 

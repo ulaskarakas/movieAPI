@@ -29,9 +29,11 @@ body {
     z-index: 1000;
 }
 
-.navbar .logo {
+.navbar .logo a{
     font-size: 1.5rem;
     font-weight: bold;
+    text-decoration: none;
+    color: white;
 }
 
 .navbar ul {
@@ -65,13 +67,23 @@ body {
 }
 
 /* Signin container styling */
-.signup-container {
+.signup-container{
     background-color: #fff;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     width: 350px;
     margin-top: 100px;
+}
+
+/* Addmovie container styling */
+.addmovie-container{
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 700px;
+    margin-top: 50px;
 }
 
 h2 {
@@ -81,8 +93,10 @@ h2 {
     font-size: 1.8rem;
 }
 
+textarea,
 input[type="email"], 
-input[type="text"], 
+input[type="text"],
+input[type="number"], 
 input[type="password"] {
     width: 100%;
     padding: 12px;
@@ -93,8 +107,10 @@ input[type="password"] {
     transition: all 0.3s ease;
 }
 
+textarea:focus,
 input[type="email"]:focus, 
-input[type="text"]:focus, 
+input[type="text"]:focus,
+input[type="number"]:focus, 
 input[type="password"]:focus {
     border-color: #4CAF50;
     outline: none;

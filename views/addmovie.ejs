@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo"><a href="http://localhost:3000/admin">Movie App</a></div>
+        <ul>
+            <li><a href="/login">Sign Out</a></li>
+        </ul>
+    </div>
+
+    <!-- Signup Form Container -->
+    <div class="addmovie-container">
+        <h2>Add Movie</h2>
+        <form id="signupForm" action="/api/movies" method="POST">
+            <input type="text" id="name" name="name" placeholder="Name" required>
+            <textarea id="description" name="description" rows="3" placeholder="Description" required></textarea>
+            <input type="number" id="releaseYear" name="releaseYear" placeholder="Release Year" min="1900" max="2250"  required>
+            <input type="text" id="genre" name="genre" placeholder="Genre(s)" required>
+            <input type="text" id="director" name="director" placeholder="Director(s)" required>
+            <input type="text" id="writer" name="writer" placeholder="Writer(s)" required>
+            <input type="text" id="star" name="star" placeholder="Star(s)" required>
+            <input type="number" id="duration" name="duration" placeholder="Duration (Minute)" min="1" max="300" required>
+            <input type="number" id="rating" name="rating" min="1" max="5" step="1" placeholder="Rating" required>
+            <button type="submit">Add</button>
+        </form>
+        <p id="responseMsg"></p>
+    </div>
+
+    <!-- Script -->
+    <script src=""></script>
+
+</body>
+</html>

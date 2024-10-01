@@ -26,7 +26,12 @@ router.post('/login', async(req, res) => {
         if (!user || user.password !== password) {
             return res.status(401).send('Email or password is incorrect.');
         }
-        res.status(200).send('Login successful!')
+        if(user.admin === true){
+            res.status(200).redirect('/admin');
+        }
+        else {
+            res.status(200).redirect('/user');
+        }
     } catch (error) {
         console.log(error);
         res.status(500).send('Server error.')

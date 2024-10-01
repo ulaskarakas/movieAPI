@@ -55,6 +55,21 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
+// Admin page after login
+app.get('/admin', (req, res) => {
+    res.render('admin');
+});
+
+// User page after login
+app.get('/user', (req, res) => {
+    res.render('user');
+});
+
+// Add Movie page after login
+app.get('/addmovie', (req, res) => {
+    res.render('addmovie');
+});
+
 // Starting the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
