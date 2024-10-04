@@ -1,30 +1,14 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv').config();
-
 const app = express();
+const db = require('./helper/db.js');
+
+// Body Parser
 app.use(express.json());
 
-// MongoDB Atlas URI
-const uri = process.env.MONGODB_ATLAS_URI;
-
-// MongoDB connection
-mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-    console.log('MongoDB connection successful');
-});
-
-// Include routes
+// Routes
 const userRoutes = require('./routes/users');
 const movieRoutes = require('./routes/movies');
 
-// Use routes
 app.use('/api/users', userRoutes);
 app.use('/api/movies', movieRoutes);
 
