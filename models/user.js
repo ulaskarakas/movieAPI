@@ -19,9 +19,6 @@ const userSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
-    admin: {
-        type: Boolean
-    },
     createdAt: { 
         type: Date, 
         default: Date.now, // Kullanıcı oluşturulduğunda tarih otomatik olarak atanır

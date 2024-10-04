@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
         const newMovie = await movie.save();
         res.status(201).json(newMovie);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(500).json({ message: 'Bir hata oluştu. Lütfen tekrar deneyin.' });
     }
 
 });
@@ -28,9 +28,9 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const movie = await Movie.find();
-        res.status(200).send(movie);
+        res.status(200).json(movie);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).json({ message: 'Bir hata oluştu. Lütfen tekrar deneyin.' });
     }
 });
 // Read a specific movie with id (GET)
@@ -38,11 +38,11 @@ router.get('/:id', async (req, res) => {
     try {
         const movie = await Movie.findById(req.params.id);
         if (!movie) {
-            return res.status(404).send('Film bulunamadı');
+            return res.status(404).json({ message: 'Film bulunamadı' });
         }
-        res.status(200).send(movie);
+        res.status(200).json(movie);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).json({ message: 'Bir hata oluştu. Lütfen tekrar deneyin.' });
     }
 });
 // Update a specific movie with id  (PUT)
@@ -50,11 +50,11 @@ router.put('/:id', async (req, res) => {
     try {
         const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, { new: true }); 
         if (!movie) {
-            return res.status(404).send('Film bulunamadı');
+            return res.status(404).json({ message: 'Film bulunamadı' });
         }
-        res.status(200).send(movie);
+        res.status(200).json(movie);
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).json({ message: 'Bir hata oluştu. Lütfen tekrar deneyin.' });
     }
 });
 // Delete a specific movie with id (DELETE):
@@ -62,11 +62,11 @@ router.delete('/:id', async (req, res) => {
     try {
         const movie = await Movie.findByIdAndDelete(req.params.id);
         if (!movie) {
-            return res.status(404).send('Film bulunamadı');
+            return res.status(404).json({ message: 'Film bulunamadı' });
         }
-        res.status(200).send({ message: 'Film silindi' });
+        res.status(200).json({ message: 'Film silindi' });
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).json({ message: 'Bir hata oluştu. Lütfen tekrar deneyin.' });
     }
 });
 

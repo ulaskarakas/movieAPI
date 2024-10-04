@@ -15,35 +15,16 @@ router.post('/', async (req, res) => {
         const newUser = await user.save();
         res.status(201).json(newUser);
     } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
-// Login user (POST)
-router.post('/login', async(req, res) => {
-    const { email, password} = req.body;
-    try {
-        const user = await User.findOne({email});
-        if (!user || user.password !== password) {
-            return res.status(401).send('Email or password is incorrect.');
-        }
-        if(user.admin === true){
-            res.status(200).redirect('/admin');
-        }
-        else {
-            res.status(200).redirect('/user');
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Server error.')
+        res.status(500).json({ message: 'Bir hata oluştu. Lütfen tekrar deneyin.' });
     }
 });
 // Read all users (GET)
 router.get('/', async (req, res) => {
     try {
         const user = await User.find(); 
-        res.status(200).send(user);
+        res.status(200).json(user);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).json({ message: 'Bir hata oluştu. Lütfen tekrar deneyin.' });
     }
 });
 // Read a specific user with id (GET)
@@ -51,11 +32,11 @@ router.get('/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
-            return res.status(404).send('Kullanıcı bulunamadı');
+            return res.status(404).json({ message:'Kullanıcı bulunamadı' });
         }
-        res.status(200).send(user);
+        res.status(200).json(user);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).json({ message: 'Bir hata oluştu. Lütfen tekrar deneyin.' });
     }
 });
 // Update a specific user with id (PUT)
@@ -63,11 +44,11 @@ router.put('/:id', async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!user) {
-            return res.status(404).send('Kullanıcı bulunamadı');
+            return res.status(404).json({ message:'Kullanıcı bulunamadı' });
         }
-        res.status(200).send(user);
+        res.status(200).json(user);
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).json({ message: 'Bir hata oluştu. Lütfen tekrar deneyin.'});
     }
 });
 // Delete a specific user with id (DELETE):
@@ -75,11 +56,11 @@ router.delete('/:id', async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
         if (!user) {
-            return res.status(404).send('Kullanıcı bulunamadı');
+            return res.status(404).json({ message:'Kullanıcı bulunamadı' });
         }
-        res.status(200).send({ message: 'Kullanıcı silindi' });
+        res.status(200).json({ message: 'Kullanıcı silindi' });
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).json({ message: 'Bir hata oluştu. Lütfen tekrar deneyin.' });
     }
 });
 
