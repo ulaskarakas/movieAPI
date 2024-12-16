@@ -1,6 +1,6 @@
 # movieAPI
 
-Express.js ve MongoDB ile Restful API
+Express.js and MongoDB with Restful API
 
 # Users
 
